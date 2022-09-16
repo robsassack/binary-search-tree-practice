@@ -15,6 +15,25 @@ class Tree {
     node.right = this.buildTree(arr, mid + 1, end);
     return node;
   }
+
+  insert(data) {
+    this.root = this.insertRec(this.root, data);
+  }
+
+  insertRec(root, data) {
+    if (root === null) {
+      root = new Node(data);
+      return root;
+    }
+
+    if (data < root.data) {
+      root.left = this.insertRec(root.left, data);
+    } else if (data > root.data) {
+      root.right = this.insertRec(root.right, data)
+    }
+
+    return root;
+  }
 }
 
 class Node {
@@ -73,4 +92,6 @@ function removeDuplicates(array) {
 }
 
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+tree.insert(2);
+tree.insert(1337);
 prettyPrint(tree.root);
