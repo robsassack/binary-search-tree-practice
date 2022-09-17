@@ -34,6 +34,42 @@ class Tree {
 
     return root;
   }
+
+  delete(data) {
+    this.root = this.deleteRec(this.root, data);
+  }
+
+  deleteRec(root, data) {
+    if (root === null) {
+      return root;
+    }
+
+    if (data < root.data) {
+      root.left = this.deleteRec(root.left, data);
+    } else if (data > root.data) {
+      root.right = this.deleteRec(root.right, data);
+    }
+
+    else {
+      if (root.left === null) {
+        return root.right;
+      } else if (root.right === null) {
+        return root.left;
+      }
+      root.data = this.minValue(root.right);
+      root.right = this.deleteRec(root.right, root.data);
+    }
+    return root;
+  }
+
+  minValue(root) {
+    let min = root.data;
+    while (root.left !== null) {
+      min = root.left.data;
+      root = root.left;
+    }
+    return min;
+  }
 }
 
 class Node {
@@ -94,4 +130,5 @@ function removeDuplicates(array) {
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 tree.insert(2);
 tree.insert(1337);
+tree.delete(67);
 prettyPrint(tree.root);
