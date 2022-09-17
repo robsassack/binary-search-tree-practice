@@ -70,6 +70,23 @@ class Tree {
     }
     return min;
   }
+
+  find(value) {
+    let current = this.root;
+    while (current.data !== value) {
+      if (current !== null) {
+        if (current.data > value) {
+          current = current.left;
+        } else {
+          current = current.right;
+        }
+        if (current === null) {
+          return null;
+        }
+      }
+    }
+    return current;
+  }
 }
 
 class Node {
@@ -131,4 +148,5 @@ let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 tree.insert(2);
 tree.insert(1337);
 tree.delete(67);
+console.log(tree.find(4));
 prettyPrint(tree.root);
