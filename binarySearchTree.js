@@ -109,6 +109,63 @@ class Tree {
       return output;
     }
   }
+
+  inorder(callback) {
+    return this.inorderRec(this.root, [], 0, callback);
+  }
+
+  inorderRec(root, arr, index, callback) {
+    if (root === null) {
+      return index;
+    }
+    index = this.inorderRec(root.left, arr, index);
+    if (callback) {
+      callback(root);
+    }
+    arr.push(root.data);
+    this.inorderRec(root.right, arr, index);
+    if (!callback) {
+      return arr;
+    }
+  }
+
+  preorder(callback) {
+    return this.preorderRec(this.root, [], 0, callback);
+  }
+
+  preorderRec(root, arr, index, callback) {
+    if (root === null) {
+      return index;
+    }
+    if (callback) {
+      callback(root);
+    }
+    arr.push(root.data);
+    index = this.preorderRec(root.left, arr, index);
+    this.preorderRec(root.right, arr, index);
+    if (!callback) {
+      return arr;
+    }
+  }
+
+  postorder(callback) {
+    return this.postorderRec(this.root, [], 0, callback);
+  }
+
+  postorderRec(root, arr, index, callback) {
+    if (root === null) {
+      return index;
+    }
+    index = this.postorderRec(root.left, arr, index);
+    this.postorderRec(root.right, arr, index);
+    if (callback) {
+      callback(root);
+    }
+    arr.push(root.data);
+    if (!callback) {
+      return arr;
+    }
+  }
 }
 
 class Node {
@@ -166,10 +223,21 @@ function removeDuplicates(array) {
   return [...new Set(array)];
 }
 
-let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+function randomArray() {
+  let array = [];
+  for (let i=0; i<10; i++) {
+    array.push(Math.floor(Math.random() * 1000) + 1);
+  }
+  return array;
+}
+
+let tree = new Tree(randomArray());
 tree.insert(2);
-tree.insert(1337);
-tree.delete(67);
-console.log(tree.find(4));
+tree.insert(250);
+tree.delete(2);
+console.log(tree.find(250));
 prettyPrint(tree.root);
 console.log(`Level order: ${tree.levelOrder()}`);
+console.log(`Inorder: ${tree.inorder()}`)
+console.log(`Preorder: ${tree.preorder()}`);
+console.log(`Postorder: ${tree.postorder()}`);
