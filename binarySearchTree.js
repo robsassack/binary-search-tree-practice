@@ -88,12 +88,15 @@ class Tree {
     return current;
   }
 
-  levelOrder(root) {
+  levelOrder(callback) {
     let queue = [];
     let output = [];
-    queue.push(root);
+    queue.push(this.root);
     while (queue.length != 0) {
       let temp = queue.shift();
+      if (callback) {
+        callback(temp);
+      }
       output.push(temp.data);
       if (temp.left !== null) {
         queue.push(temp.left);
@@ -102,7 +105,9 @@ class Tree {
         queue.push(temp.right);
       }
     }
-    return output;
+    if (!callback) {
+      return output;
+    }
   }
 }
 
@@ -167,4 +172,4 @@ tree.insert(1337);
 tree.delete(67);
 console.log(tree.find(4));
 prettyPrint(tree.root);
-console.log(`Level order: ${tree.levelOrder(tree.root)}`);
+console.log(`Level order: ${tree.levelOrder()}`);
