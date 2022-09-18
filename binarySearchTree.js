@@ -87,6 +87,23 @@ class Tree {
     }
     return current;
   }
+
+  levelOrder(root) {
+    let queue = [];
+    let output = [];
+    queue.push(root);
+    while (queue.length != 0) {
+      let temp = queue.shift();
+      output.push(temp.data);
+      if (temp.left !== null) {
+        queue.push(temp.left);
+      }
+      if (temp.right !== null) {
+        queue.push(temp.right);
+      }
+    }
+    return output;
+  }
 }
 
 class Node {
@@ -150,3 +167,4 @@ tree.insert(1337);
 tree.delete(67);
 console.log(tree.find(4));
 prettyPrint(tree.root);
+console.log(`Level order: ${tree.levelOrder(tree.root)}`);
