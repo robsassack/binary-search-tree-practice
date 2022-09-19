@@ -167,13 +167,17 @@ class Tree {
     }
   }
 
-  height(node, root=this.root) {
+  height(root=this.root) {
     if (root === null) {
       return -1;
     }
-    let leftHeight = this.height(node, root.left);
-    let rightHeight = this.height(node, root.right);
-    return Math.max(leftHeight, rightHeight) + 1;
+    let leftHeight = this.height(root.left);
+    let rightHeight = this.height(root.right);
+    if (leftHeight > rightHeight) {
+      return leftHeight + 1;
+    } else {
+      return rightHeight + 1;
+    }
   }
 
   depth(node, root=this.root) {
