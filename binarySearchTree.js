@@ -188,6 +188,20 @@ class Tree {
     }
     return distance;
   }
+
+  isBalanced(root=this.root) {
+    if (root === null) {
+      return true;
+    }
+    let leftHeight = this.height(root.left);
+    let rightHeight = this.height(root.right);
+    if (Math.abs(leftHeight - rightHeight) <= 1 &&
+        this.isBalanced(root.left) &&
+        this.isBalanced(root.right)) {
+      return true;
+    }
+    return false;
+  }
 }
 
 class Node {
@@ -263,3 +277,4 @@ console.log(`Level order: ${tree.levelOrder()}`);
 console.log(`Inorder: ${tree.inorder()}`)
 console.log(`Preorder: ${tree.preorder()}`);
 console.log(`Postorder: ${tree.postorder()}`);
+console.log(`Is balanced: ${tree.isBalanced()}`);
