@@ -202,6 +202,11 @@ class Tree {
     }
     return false;
   }
+
+  rebalance() {
+    this.array = this.inorder();
+    this.root = this.buildTree(this.array, 0, this.array.length - 1);
+  }
 }
 
 class Node {
@@ -262,19 +267,43 @@ function removeDuplicates(array) {
 function randomArray() {
   let array = [];
   for (let i=0; i<10; i++) {
-    array.push(Math.floor(Math.random() * 1000) + 1);
+    array.push(Math.floor(Math.random() * 100) + 1);
   }
   return array;
 }
 
 let tree = new Tree(randomArray());
-tree.insert(2);
-tree.insert(250);
-tree.delete(2);
-console.log(tree.find(250));
-prettyPrint(tree.root);
+// tree.insert(2);
+// tree.insert(250);
+// tree.delete(2);
+// console.log(tree.find(250));
+// prettyPrint(tree.root);
+// console.log(`Level order: ${tree.levelOrder()}`);
+// console.log(`Inorder: ${tree.inorder()}`)
+// console.log(`Preorder: ${tree.preorder()}`);
+// console.log(`Postorder: ${tree.postorder()}`);
+// console.log(`Is balanced: ${tree.isBalanced()}`);
+
+console.log(`Is balanced: ${tree.isBalanced()}`);
+console.log(`Level order: ${tree.levelOrder()}`);
+console.log(`Inorder: ${tree.inorder()}`)
+console.log(`Preorder: ${tree.preorder()}`);
+console.log(`Postorder: ${tree.postorder()}`);
+for (let i=0; i<10; i++) {
+  let x = Math.floor(Math.random() * 1000) + 1
+  console.log(`Inserting ${Math.floor(Math.random() * 1000) + 1}`)
+  tree.insert(x);
+}
 console.log(`Level order: ${tree.levelOrder()}`);
 console.log(`Inorder: ${tree.inorder()}`)
 console.log(`Preorder: ${tree.preorder()}`);
 console.log(`Postorder: ${tree.postorder()}`);
 console.log(`Is balanced: ${tree.isBalanced()}`);
+console.log(`Rebalancing...`);
+tree.rebalance();
+console.log(`Is balanced: ${tree.isBalanced()}`);
+console.log(`Level order: ${tree.levelOrder()}`);
+console.log(`Inorder: ${tree.inorder()}`)
+console.log(`Preorder: ${tree.preorder()}`);
+console.log(`Postorder: ${tree.postorder()}`);
+// prettyPrint(tree.root);
