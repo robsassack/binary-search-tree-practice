@@ -277,16 +277,8 @@ function randomArray() {
 }
 
 let tree = new Tree(randomArray());
-// tree.insert(2);
-// tree.insert(250);
-// tree.delete(2);
-// console.log(tree.find(250));
-// prettyPrint(tree.root);
-// console.log(`Level order: ${tree.levelOrder()}`);
-// console.log(`Inorder: ${tree.inorder()}`)
-// console.log(`Preorder: ${tree.preorder()}`);
-// console.log(`Postorder: ${tree.postorder()}`);
-// console.log(`Is balanced: ${tree.isBalanced()}`);
+
+prettyPrint(tree.root);
 
 console.log(`Is balanced: ${tree.isBalanced()}`);
 console.log(`Level order: ${tree.levelOrder()}`);
@@ -298,16 +290,14 @@ for (let i=0; i<10; i++) {
   console.log(`Inserting ${Math.floor(Math.random() * 1000) + 1}`)
   tree.insert(x);
 }
-console.log(`Level order: ${tree.levelOrder()}`);
-console.log(`Inorder: ${tree.inorder()}`)
-console.log(`Preorder: ${tree.preorder()}`);
-console.log(`Postorder: ${tree.postorder()}`);
 console.log(`Is balanced: ${tree.isBalanced()}`);
 console.log(`Rebalancing...`);
 tree.rebalance();
+
+prettyPrint(tree.root);
+
 console.log(`Is balanced: ${tree.isBalanced()}`);
 console.log(`Level order: ${tree.levelOrder()}`);
 console.log(`Inorder: ${tree.inorder()}`)
 console.log(`Preorder: ${tree.preorder()}`);
 console.log(`Postorder: ${tree.postorder()}`);
-// prettyPrint(tree.root);
