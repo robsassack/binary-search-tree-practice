@@ -166,6 +166,28 @@ class Tree {
       return arr;
     }
   }
+
+  height(node, root=this.root) {
+    if (root === null) {
+      return -1;
+    }
+    let leftHeight = this.height(node, root.left);
+    let rightHeight = this.height(node, root.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  depth(node, root=this.root) {
+    if (root === null) {
+      return -1;
+    }
+    let distance = -1;
+    if ((root.data === node.data) ||
+        (distance = this.depth(node, root.left)) >= 0 ||
+        (distance = this.depth(node, root.right)) >= 0) {
+      return distance + 1;
+    }
+    return distance;
+  }
 }
 
 class Node {
